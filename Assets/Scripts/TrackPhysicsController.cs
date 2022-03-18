@@ -18,6 +18,7 @@ public class TrackPhysicsController : MonoBehaviour
     {
     }
 
+    
     private void OnTriggerStay(Collider collider)
     {
         GameObject curr = collider.gameObject;
@@ -25,6 +26,15 @@ public class TrackPhysicsController : MonoBehaviour
         Vector3 direction = ObjectRigidbody.velocity.normalized;
         Vector3 newforce = direction * thrust;
         ObjectRigidbody.AddForce(newforce, ForceMode.VelocityChange);
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        GameObject curr = other.gameObject;
+        Rigidbody ObjectRigidbody = curr.GetComponent<Rigidbody>();
+        Vector3 direction = ObjectRigidbody.velocity.normalized;
+        ObjectRigidbody.velocity = direction / 2;
 
     }
 
